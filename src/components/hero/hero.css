@@ -1,0 +1,330 @@
+/* =========================================================
+   HERO — full-screen beauty advertisement
+   ========================================================= */
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+  isolation: isolate;
+  /* One soft tone, quietly blended from blush, peach and beige */
+  background:
+    radial-gradient(55% 65% at 18% 68%, rgba(244, 197, 168, 0.55), rgba(244, 197, 168, 0) 70%),
+    radial-gradient(60% 60% at 82% 22%, rgba(241, 214, 213, 0.9), rgba(241, 214, 213, 0) 70%),
+    radial-gradient(70% 55% at 70% 95%, rgba(221, 166, 168, 0.32), rgba(221, 166, 168, 0) 70%),
+    linear-gradient(160deg, #fbefe8 0%, #f7e4de 50%, #f6e5d9 100%);
+}
+
+/* Opening wipe: stacked colour bands sliding up across the screen */
+.slide-intro {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  overflow: hidden;
+}
+.slide-intro__band {
+  position: absolute;
+  inset: 0;
+  display: block;
+  will-change: transform;
+  box-shadow: 0 -18px 40px rgba(73, 59, 56, 0.12);
+}
+
+
+/* ---------- Product (LEFT) ---------- */
+.hero__product {
+  position: absolute;
+  z-index: 2;
+  left: 2vw;
+  top: 0;
+  bottom: 0;
+  width: 40vw;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 4.5vh;
+  pointer-events: none;
+  transform-origin: 50% 100%;
+}
+
+.pr {
+  position: relative;
+  height: min(85svh, 112vw);
+  height: min(85vh, 112vw);
+}
+@supports (height: 1svh) {
+  .pr {
+    height: min(85svh, 112vw);
+  }
+}
+
+.pr__body {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.pr__float {
+  position: relative;
+  height: 100%;
+  animation: pr-float 7.5s ease-in-out infinite alternate both;
+  will-change: transform;
+}
+
+@keyframes pr-float {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(0.8deg);
+  }
+  100% {
+    transform: translate3d(0, -4px, 0) rotate(-0.6deg);
+  }
+}
+
+.concealer {
+  height: 100%;
+  width: auto;
+  aspect-ratio: 320 / 900;
+  filter: drop-shadow(18px 26px 26px rgba(120, 82, 74, 0.2)) drop-shadow(-6px 0 14px rgba(255, 255, 255, 0.5));
+}
+.concealer--photo {
+  object-fit: contain;
+}
+
+.pr__shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -2.2%;
+  width: 115%;
+  height: 7%;
+  margin-left: -57.5%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(110, 72, 64, 0.32), rgba(110, 72, 64, 0.12) 55%, transparent);
+  filter: blur(6px);
+  animation: pr-shadow 7.5s ease-in-out infinite alternate both;
+}
+@keyframes pr-shadow {
+  50% {
+    transform: scaleX(0.92);
+    opacity: 0.8;
+  }
+}
+
+/* annotation pointing at the attachment */
+.pr__note {
+  position: absolute;
+  left: 71%;
+  top: 38.2%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.pr__note-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cream);
+  box-shadow: 0 0 0 1.5px var(--rose), 0 0 0 6px rgba(201, 130, 139, 0.18);
+  flex: none;
+}
+.pr__note-line {
+  width: clamp(28px, 4vw, 70px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--rose), rgba(201, 130, 139, 0.3));
+}
+.pr__note-text {
+  padding-left: 10px;
+  max-width: 9.5em;
+  white-space: normal;
+  font-family: var(--f-classic);
+  font-style: italic;
+  font-size: clamp(14px, 1.1vw, 19px);
+  line-height: 1.15;
+  color: var(--ink);
+}
+@media (max-width: 1240px) {
+  .pr__note {
+    display: none;
+  }
+}
+
+/* ---------- Typography (RIGHT) ---------- */
+.hero__type {
+  position: absolute;
+  z-index: 4;
+  right: 3vw;
+  top: calc(var(--nav-h) + 3.5vh);
+  width: auto;
+  pointer-events: none;
+}
+
+.hero__title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: var(--f-heavy);
+  font-weight: 900;
+  font-size: min(10.2vw, 19vh);
+}
+
+/* One bold, sharp typeface for every word, stacked flush-left */
+.hero__line {
+  display: block;
+  font-size: 1em;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding-bottom: 0.03em;
+  transform-origin: 0% 80%;
+  will-change: transform, opacity;
+}
+
+/* ---------- Supporting text ---------- */
+.hero__details {
+  position: absolute;
+  z-index: 4;
+  right: 3vw;
+  bottom: 7vh;
+  width: min(30vw, 400px);
+}
+
+.hero__desc {
+  margin: 0 0 14px;
+  font-family: var(--f-sans);
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.55;
+  color: #5d4b47;
+}
+
+.hero__cta {
+  font-size: 12px;
+}
+
+.hero__scroll-wrap {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 4vh;
+  transform: translateX(-50%);
+}
+.hero__scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--brown);
+  padding: 6px;
+}
+.hero__scroll-line {
+  width: 1px;
+  height: 46px;
+  background: linear-gradient(var(--rose), transparent);
+  transform-origin: top;
+  animation: scroll-line 2.4s var(--ease) infinite;
+}
+@keyframes scroll-line {
+  0% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+  60% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  background: var(--cream);
+  pointer-events: none;
+}
+
+/* ---------- Tablet landscape / small laptops ---------- */
+@media (max-width: 1100px) and (min-aspect-ratio: 4/5) {
+  .hero__details {
+    width: 36vw;
+  }
+  .pr__note-text {
+    font-size: 14px;
+  }
+}
+
+/* ---------- Portrait: phones & tablets ---------- */
+@media (max-aspect-ratio: 4/5), (max-width: 640px) {
+  .hero__type {
+    left: 5vw;
+    right: 5vw;
+    width: auto;
+    top: calc(var(--nav-h) + 1.5vh);
+  }
+  .hero__title {
+    font-size: 16.2vw;
+  }
+
+  .hero__product {
+    left: -3vw;
+    width: 56vw;
+    padding-bottom: 3.5vh;
+  }
+  .pr {
+    height: min(54vh, 128vw);
+  }
+  @supports (height: 1svh) {
+    .pr {
+      height: min(54svh, 128vw);
+    }
+  }
+  .pr__note {
+    display: none;
+  }
+
+  .hero__details {
+    right: 5vw;
+    bottom: 9vh;
+    width: 44vw;
+  }
+  .hero__desc {
+    font-size: 14px;
+  }
+  .hero__cta {
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+  }
+  .hero__scroll-wrap {
+    display: none;
+  }
+}
+
+/* Tall tablets get more product */
+@media (max-aspect-ratio: 4/5) and (min-width: 641px) {
+  .pr {
+    height: min(58vh, 110vw);
+  }
+  .hero__details {
+    width: 40vw;
+    bottom: 12vh;
+  }
+  .hero__desc {
+    font-size: 17px;
+  }
+}
